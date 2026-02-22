@@ -3,7 +3,7 @@ name: Publish Preview NuGet Packages
 on:
   push:
     branches:
-      - master
+      - main
 
 jobs:
   publish-preview:
