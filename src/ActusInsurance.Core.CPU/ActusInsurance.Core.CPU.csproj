@@ -3,6 +3,10 @@
     <TargetFramework>net9.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
+    <!-- NuGet package metadata -->
+    <PackageId>ActusInsurance.Core.CPU</PackageId>
+    <Description>CPU-based contract processing engine built on top of ActusInsurance.Core, providing PAM and other ACTUS contract implementations.</Description>
+    <IsPackable>true</IsPackable>
     <AssemblyName>$(MSBuildProjectName)</AssemblyName>
     <RootNamespace>$(MSBuildProjectName.Replace(" ", "_"))</RootNamespace>
   </PropertyGroup>

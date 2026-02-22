@@ -1,0 +1,58 @@
+name: Publish Stable NuGet Packages
+
+on:
+  release:
+    types:
+      - published
+
+jobs:
+  publish-stable:
+    name: Build, Test & Publish Stable
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '9.0.x'
+
+      # Extract semver from the release tag (strips the leading 'v').
+      # Expected tag format: v<major>.<minor>.<patch>  e.g. v1.2.3
+      - name: Extract version from tag
+        id: get_version
+        run: |
+          TAG="${{ github.event.release.tag_name }}"
+          VERSION="${TAG#v}"
+          # Validate semver format
+          if [[ ! "$VERSION" =~ ^[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
+            echo "ERROR: Tag '$TAG' does not follow v<major>.<minor>.<patch> format."
+            exit 1
+          fi
+          echo "VERSION=$VERSION" >> "$GITHUB_OUTPUT"
+          echo "Publishing stable version: $VERSION"
+
+      - name: Restore dependencies
+        run: dotnet restore
+
+      - name: Build
+        run: dotnet build --configuration Release --no-restore
+
+      - name: Run tests
+        run: dotnet test --configuration Release --no-build --verbosity normal
+
+      - name: Pack stable packages
+        # IsPackable=false on the test project ensures it is skipped automatically.
+        run: |
+          dotnet pack --configuration Release --no-build \
+            -p:Version="${{ steps.get_version.outputs.VERSION }}" \
+            --output ./nupkgs
+
+      - name: Push packages to NuGet.org
+        run: |
+          dotnet nuget push "./nupkgs/*.nupkg" \
+            --api-key ${{ secrets.NUGET_API_KEY }} \
+            --source https://api.nuget.org/v3/index.json \
+            --skip-duplicate
