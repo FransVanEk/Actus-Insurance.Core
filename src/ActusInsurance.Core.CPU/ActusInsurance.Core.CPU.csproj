@@ -3,8 +3,8 @@
     <TargetFramework>net9.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
-    <AssemblyName>ActusInsurance.Core.CPU</AssemblyName>
-    <RootNamespace>ActusInsurance.Core.CPU</RootNamespace>
+    <AssemblyName>$(MSBuildProjectName)</AssemblyName>
+    <RootNamespace>$(MSBuildProjectName.Replace(" ", "_"))</RootNamespace>
   </PropertyGroup>
   <ItemGroup>
     <ProjectReference Include="..\ActusInsurance.Core\ActusInsurance.Core.csproj" />
