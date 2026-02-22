@@ -1,0 +1,12 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net9.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <AssemblyName>ActusInsurance.Core.CPU</AssemblyName>
+    <RootNamespace>ActusInsurance.Core.CPU</RootNamespace>
+  </PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ActusInsurance.Core\ActusInsurance.Core.csproj" />
+  </ItemGroup>
+</Project>
