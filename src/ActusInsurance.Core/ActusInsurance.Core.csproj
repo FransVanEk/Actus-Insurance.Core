@@ -5,6 +5,10 @@
     <Nullable>enable</Nullable>
     <AssemblyName>ActusInsurance.Core</AssemblyName>
     <RootNamespace>ActusInsurance.Core</RootNamespace>
+    <!-- NuGet package metadata -->
+    <PackageId>ActusInsurance.Core</PackageId>
+    <Description>Core library for ACTUS-based insurance contract modelling, providing contract terms, state spaces, and schedule generation.</Description>
+    <IsPackable>true</IsPackable>
   </PropertyGroup>
   <ItemGroup>
     <Folder Include="Shared\" />

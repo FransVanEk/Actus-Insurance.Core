@@ -1,0 +1,46 @@
+name: Publish Preview NuGet Packages
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  publish-preview:
+    name: Build, Test & Publish Preview
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '9.0.x'
+
+      - name: Restore dependencies
+        run: dotnet restore
+
+      - name: Build
+        run: dotnet build --configuration Release --no-restore
+
+      - name: Run tests
+        run: dotnet test --configuration Release --no-build --verbosity normal
+
+      - name: Pack preview packages
+        # Version format: 1.0.0-preview.<run_number>
+        # IsPackable=false on the test project ensures it is skipped automatically.
+        run: |
+          PREVIEW_VERSION="1.0.0-preview.${{ github.run_number }}"
+          echo "Packing version: $PREVIEW_VERSION"
+          dotnet pack --configuration Release --no-build \
+            -p:Version="$PREVIEW_VERSION" \
+            --output ./nupkgs
+
+      - name: Push packages to NuGet.org
+        run: |
+          dotnet nuget push "./nupkgs/*.nupkg" \
+            --api-key ${{ secrets.NUGET_API_KEY }} \
+            --source https://api.nuget.org/v3/index.json \
+            --skip-duplicate
