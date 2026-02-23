@@ -6,6 +6,7 @@ This folder contains the full documentation for **Actus-Insurance.Core** — a .
 
 | File | Description |
 |---|---|
+| [business-faq.md](./business-faq.md) | Business FAQ for stakeholders, managers, auditors, and partners |
 | [overview.md](./overview.md) | System purpose, key workflows, and main components |
 | [value-proposition.md](./value-proposition.md) | Business value and strategic rationale |
 | [architecture.md](./architecture.md) | Package structure, data flow, and design decisions |
