@@ -1,0 +1,5 @@
+<Solution>
+  <Project Path="src/ActusInsurance.Core.CPU/ActusInsurance.Core.CPU.csproj" />
+  <Project Path="src/ActusInsurance.Core/ActusInsurance.Core.csproj" />
+  <Project Path="src/ActusInsurance.Tests.CPU/ActusInsurance.Tests.CPU.csproj" />
+</Solution>

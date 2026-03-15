@@ -1,0 +1,16 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net9.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <!-- NuGet package metadata -->
+    <PackageId>ActusInsurance.Core</PackageId>
+    <Description>Core library for ACTUS-based insurance contract modelling, providing contract terms, state spaces, and schedule generation.</Description>
+    <IsPackable>true</IsPackable>
+    <AssemblyName>$(MSBuildProjectName)</AssemblyName>
+    <RootNamespace>$(MSBuildProjectName.Replace(" ", "_"))</RootNamespace>
+  </PropertyGroup>
+  <ItemGroup>
+    <Folder Include="Shared\" />
+  </ItemGroup>
+</Project>
